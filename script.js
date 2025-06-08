@@ -6,21 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Default data
     const defaultData = {
-        relation: 'PLAYER',
-        attributes: 'PID, Name, Team, Position, Age',
-        primaryKey: 'PID',
+        relation: 'Player',
+        attributes: 'Name, Height, Gender, Address, Weight, DOB, Telephone',
+        primaryKey: 'Name',
         queryCount: 4,
         siteCount: 3,
         queries: [
-            "SELECT Name, Position FROM PLAYER WHERE Age > 30",
-            "SELECT Name, Age FROM PLAYER WHERE Team = 'A'",
-            "SELECT Team, Position FROM PLAYER WHERE Age < 25",
-            "SELECT Name, Team, Age FROM PLAYER"
+            "SELECT Name, DOB, Address, Telephone FROM Player WHERE Gender = value;",
+            "SELECT Avg (Height), Avg (Weight) FROM Player WHERE Gender = value;",
+            "SELECT Name, Height, Weight, DOB FROM Player WHERE Name LIKE value;",
+            "SELECT Name, Address, Telephone FROM Player WHERE Name = value;"
         ],
         siteAccess: [
-            [60, 0, 5],
-            [0, 5, 7],
-            [45, 0, 2],
+            [60, 0, 45],
+            [0, 5, 0],
+            [5, 7, 2],
             [35, 38, 13]
         ]
     };

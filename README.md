@@ -60,16 +60,44 @@ The tool performs the following analysis:
 
 ## Example
 
-Input:
+Here's a complete example of how to use the tool:
+
+### Input Data
 ```
-Relation: PLAYER
-Attributes: PID, Name, Team, Position, Age
-Primary Key: PID
-Queries: 4
-Sites: 3
+Relation Name: Player
+Attributes (comma-separated): Name, Height, Gender, Address, Weight, DOB, Telephone
+Primary Key: Name
+Number of Queries: 4
+Number of Sites: 3
+
+Query 1: SELECT Name, DOB, Address, Telephone FROM Player WHERE Gender = value;
+Site Access: [60, 0, 45]
+
+Query 2: SELECT Avg (Height), Avg (Weight) FROM Player WHERE Gender = value;
+Site Access: [0, 5, 0]
+
+Query 3: SELECT Name, Height, Weight, DOB FROM Player WHERE Name LIKE value;
+Site Access: [5, 7, 2]
+
+Query 4: SELECT Name, Address, Telephone FROM Player WHERE Name = value;
+Site Access: [35, 38, 13]
 ```
 
-The tool will analyze the queries and their access patterns to suggest the optimal vertical fragmentation of the relation.
+### Analysis Results
+The tool will analyze these queries and their access patterns to:
+1. Create an attribute usage matrix showing which attributes are used in each query
+2. Generate an affinity matrix based on query patterns and site access frequencies
+3. Perform clustered attribute ordering to find the optimal arrangement
+4. Calculate split quality for all possible fragmentations
+5. Recommend the best vertical fragmentation with the highest split quality
+
+### Expected Output
+The tool will show:
+- Detailed attribute usage matrix
+- Complete affinity matrix
+- Step-by-step clustering process
+- All possible fragmentation options with their quality measures
+- The optimal vertical fragmentation that maximizes split quality
 
 ## Technical Details
 
@@ -90,6 +118,7 @@ The tool will analyze the queries and their access patterns to suggest the optim
 - All calculations are performed in the browser
 - Results are displayed in real-time
 - The interface is designed to be intuitive and user-friendly
+- The example data is pre-loaded in the tool for quick testing
 
 ## Future Improvements
 
@@ -97,4 +126,6 @@ The tool will analyze the queries and their access patterns to suggest the optim
 - More complex query pattern analysis
 - Additional fragmentation strategies
 - Export functionality for results
-- Visualization of fragmentation results 
+- Visualization of fragmentation results
+- Support for more complex SQL queries
+- Ability to save and load analysis configurations 
